@@ -1,14 +1,14 @@
 package com.example.takahirom.sandboxapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.os.TraceCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,6 +44,7 @@ public class AnrActivity extends AppCompatActivity {
     }
 
     public void anr(View view) throws IOException {
+        TraceCompat.beginSection("anr");
         for (int i = 0; i < 10; i++) {
             Log.d("AnrActivity", "write");
             String path = getCacheDir().getPath() + "test.txt";
@@ -63,6 +64,7 @@ public class AnrActivity extends AppCompatActivity {
             }
             inputStreamReader.close();
         }
+        TraceCompat.endSection();
 
     }
 }
